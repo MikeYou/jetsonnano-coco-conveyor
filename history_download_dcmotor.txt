@@ -1,0 +1,77 @@
+cd /opt/nvidia/jetson-gpio/samples/
+   70  ls
+   71  cd /opt/nvidia/
+   72  ls
+   73  python3
+   74  sudo apt-get install python-pip
+   75  sudo pip3 install Jetson.GPIO
+   76  sudo pip install Jetson.GPIO
+   77  sudo apt-get install git-all
+   78  git clone https://github.com/NVIDIA/jetson-gpio.git
+   79  git clone https://github.com/NVIDIA/jetson-gpio
+   80  cd ..
+   81  git clone https://github.com/NVIDIA/jetson-gpio
+   82  cd ~/
+   83  mkdir code
+   84  cd code
+   85  git clone https://github.com/NVIDIA/jetson-gpio
+   86  ls
+   87  cd jetson-gpio/
+   88  ls
+   89  cd samples/
+   90  gedit test.py
+   91  chmod +c test.py
+   92  chmod +x test.py
+   93  sudo ./run_sample.sh test.py
+   94  python3 test.py
+   95  sudo shutdown now
+   96  python
+   97  python3
+   98  ls
+   99  df -m
+  100  ls
+  101  cd code
+  102  ls
+  103  gedit jetson-gpio/
+  104  gedit jetson-gpio
+  105  cd jetson-gpio
+  106  ls
+  107  cd samples
+  108  ls
+  109  gedit test.py
+  110  ls
+  111  cd Desktop/
+  112  ls
+  113  python3 dc_test.py
+  114  ls
+  115  cd code
+  116  ls
+  117  cd jetson-gpio/
+  118  ls
+  119  cd samples/
+  120  ls
+  121  gedit test.py
+  122  python3 dc_test.py
+  123  cd Desktop/
+  124  python3 dc_test.py
+  125  cd Desktop/
+  126  python3 dc_test.py
+  127  cd ~/code/jetson-gpio/samples
+  128  python3 simple_pwm.py
+  129  python3 dc_test.py
+  130  cd ..
+  131  ls
+  132  cd Desktop/
+  133  python3 dc_test.py
+  134  y
+  135  python3 dc_test.py
+  136  ls
+  137  cd code
+  138  ls
+  139  cd jetson-gpio/
+  140  ls
+  141  cd samples/
+  142  ls
+  143  gedit simple_pwm.py 
+  144  history
+
