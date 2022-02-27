@@ -3,17 +3,17 @@ import time
 
 
 # for 1st Motor on ENA
-ENA = 33
-IN1 = 35
-IN2 = 37
-IN3 = 36
-IN4 = 38
-ENB = 32
+ENA = 13 #33
+IN1 = 19#35
+IN2 = 26#37
+IN3 = 16#36
+IN4 = 20#38
+ENB = 12#32
 
 
 
 # set pin numbers to the board's
-GPIO.setmode(GPIO.BOARD)
+
 
 
 # initialize EnA, In1 and In2
@@ -58,8 +58,8 @@ GPIO.output(IN4, GPIO.LOW)
 #GPIO.output(IN2, GPIO.HIGH)
 #time.sleep(1)
 
-a = input("stop? y/n")
-while a == "y":
+a = input("stop? (y/n)")
+if a == "y":
 # Stop
     GPIO.output(ENA, GPIO.LOW)
     GPIO.output(IN1, GPIO.LOW)
@@ -69,3 +69,5 @@ while a == "y":
     GPIO.output(IN4, GPIO.LOW)
     time.sleep(1)
     GPIO.cleanup()
+else:
+    pass
