@@ -75,6 +75,8 @@ kit.servo[0].angle=0
 a = input("stop? (y/n)")
 if a == "y":
 # Stop
+    kit.servo[8].angle=180
+    kit.servo[0].angle=0
     ENA.value = False
     ENB.value = False
     IN1.value = False

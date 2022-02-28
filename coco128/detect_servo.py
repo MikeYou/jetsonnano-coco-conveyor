@@ -53,7 +53,61 @@ from utils.torch_utils import select_device, time_sync
 """controlling servo mode PCA9685"""
 from adafruit_servokit import ServoKit
 kit = ServoKit(channels=16)
-"""controlling servo mode PCA9685"""
+
+
+"""controling conveyor and spinning bottle"""
+import board
+import digitalio
+import busio
+import time
+"""
+#spinning bottle i/o
+
+#ENA = D13 #33
+#IN1 = D19#35
+#IN2 = D26#37
+
+#conveyor i/o
+
+#IN3 = D16#36
+#IN4 = D20#38
+#ENB = D12#32
+"""
+
+
+ENA = digitalio.DigitalInOut(board.D13)
+IN1 = digitalio.DigitalInOut(board.D19)
+IN2 = digitalio.DigitalInOut(board.D26)
+IN3 = digitalio.DigitalInOut(board.D16)
+IN4 = digitalio.DigitalInOut(board.D20)
+ENB = digitalio.DigitalInOut(board.D12)
+
+ENA.direction = digitalio.Direction.OUTPUT
+IN1.direction = digitalio.Direction.OUTPUT
+IN2.direction = digitalio.Direction.OUTPUT
+IN3.direction = digitalio.Direction.OUTPUT
+IN4.direction = digitalio.Direction.OUTPUT
+ENB.direction = digitalio.Direction.OUTPUT
+
+#initial 
+ENA.value = False
+ENB.value = False
+IN1.value = False
+IN2.value = False
+IN3.value = False
+IN4.value = False
+
+#start conveyor
+ENB.value = True
+
+IN3.value = 1
+IN4.value = 0
+#start rotate
+#ENA.value = True
+
+#IN1.value = 1
+#IN2.value = 0
+"""controling conveyor and spinning bottle"""
 
 
 @torch.no_grad()
@@ -278,3 +332,18 @@ def main(opt):
 if __name__ == "__main__":
     opt = parse_opt()
     main(opt)
+    a = input("stop? (y/n)")
+    if a == "y":
+    # Stop
+        kit.servo[8].angle=180
+        kit.servo[0].angle=0
+        ENA.value = False
+        ENB.value = False
+        IN1.value = False
+        IN2.value = False
+        IN3.value = False
+        IN4.value = False
+        time.sleep(1)
+        GPIO.cleanup()
+    else:
+        pass
