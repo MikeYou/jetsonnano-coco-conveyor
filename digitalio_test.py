@@ -2,6 +2,10 @@ import board
 import digitalio
 import busio
 
+"""controlling servo mode PCA9685"""
+from adafruit_servokit import ServoKit
+
+"""controlling servo mode PCA9685"""
 
 print("Hello blinka!")
 
@@ -59,6 +63,14 @@ IN4.value = 0
 
 #IN1.value = 1
 #IN2.value = 0
+
+
+"""controlling servo mode PCA9685"""
+
+kit = ServoKit(channels=16)
+"""controlling servo mode PCA9685"""
+kit.servo[8].angle=100
+kit.servo[0].angle=0
 
 a = input("stop? (y/n)")
 if a == "y":
