@@ -23,12 +23,11 @@ Usage - formats:
                                          yolov5s.tflite             # TensorFlow Lite
                                          yolov5s_edgetpu.tflite     # TensorFlow Edge TPU
 """
-import time
 
 import argparse
 import os
 import sys
-from pathlib import Pathftorc
+from pathlib import Path
 
 import cv2
 import torch
@@ -46,10 +45,16 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
                            increment_path, non_max_suppression, print_args, scale_coords, strip_optimizer, xyxy2xywh)
 from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, time_sync
+
+
+
+
+
 """controlling servo mode PCA9685"""
 from adafruit_servokit import ServoKit
 kit = ServoKit(channels=16)
 """controlling servo mode PCA9685"""
+
 
 @torch.no_grad()
 def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
@@ -171,17 +176,21 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                         line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
                         with open(txt_path + '.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
-                    """####SERVO["number of servo"]################################################"""
+                   
+                    """SERVO control"""
+                        #good"
                     if cls == 0:
-                        kit = Servo[0].angle[0]
-                        kit = Servo[2].angle[90]
-                    elif cls ==1:
-                        kit = Servo[0].angle[0]
-                        kit = Servo[2].angle[0]
-                    elif cls ==2:
-                        kit = Servo[0].angle[90]
-                        kit = Servo[2].angle[0]
-                    """####SERVO################################################"""
+                        kit.servo[8].angle=0
+                        kit.servo[0].angle=50
+                        #bad"
+                    elif cls == 1:
+                        kit.servo[8].angle=180
+                        kit.servo[0].angle=0
+                        #agg"
+                    elif cls == 2:
+                        kit.servo[8].angle=130
+                        kit.servo[0].angle=0
+                        """SERVO"""
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
@@ -267,9 +276,5 @@ def main(opt):
 
 
 if __name__ == "__main__":
-    start = time.time()
     opt = parse_opt()
     main(opt)
-    end = time.time()
-    print(f'Total time of operation: {start - end}')
-        
