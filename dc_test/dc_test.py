@@ -2,14 +2,14 @@ import RPi.GPIO as GPIO
 import time
 from adafruit_servokit import ServoKit
 kit = ServoKit(channels=16)
-
+GPIO.setmode(GPIO.BCM)
 # for 1st Motor on ENA
-ENA = D13 #33
-IN1 = D19#35
-IN2 = D26#37
-IN3 = D16#36
-IN4 = D20#38
-ENB = D12#32
+ENA = 13 #33
+IN1 = 19#35
+IN2 = 26#37
+IN3 = 16#36
+IN4 = 20#38
+ENB = 12#32
 
 
 
