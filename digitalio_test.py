@@ -69,14 +69,14 @@ IN4.value = 0
 
 kit = ServoKit(channels=16)
 """controlling servo mode PCA9685"""
-kit.servo[8].angle=100
-kit.servo[0].angle=0
+kit.servo[8].angle=90
+kit.servo[0].angle=80
 
 a = input("stop? (y/n)")
 if a == "y":
 # Stop
-    kit.servo[8].angle=180
-    kit.servo[0].angle=0
+    kit.servo[8].angle=90
+    kit.servo[0].angle=90
     ENA.value = False
     ENB.value = False
     IN1.value = False

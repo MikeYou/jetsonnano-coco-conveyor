@@ -105,8 +105,11 @@ IN4.value = 0
 #start rotate
 #ENA.value = True
 
+
+
 #IN1.value = 1
 #IN2.value = 0
+
 """controling conveyor and spinning bottle"""
 
 
@@ -234,16 +237,16 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                     """SERVO control"""
                         #good"
                     if cls == 0:
-                        kit.servo[8].angle=0
-                        kit.servo[0].angle=50
+                        kit.servo[8].angle=60
+                        kit.servo[0].angle=60
                         #bad"
                     elif cls == 1:
-                        kit.servo[8].angle=180
-                        kit.servo[0].angle=0
+                        kit.servo[8].angle=90
+                        kit.servo[0].angle=90
                         #agg"
                     elif cls == 2:
-                        kit.servo[8].angle=130
-                        kit.servo[0].angle=0
+                        kit.servo[8].angle=120
+                        kit.servo[0].angle=120
                         """SERVO"""
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
@@ -335,8 +338,8 @@ if __name__ == "__main__":
     a = input("stop? (y/n)")
     if a == "y":
     # Stop
-        kit.servo[8].angle=180
-        kit.servo[0].angle=0
+        kit.servo[8].angle=90
+        kit.servo[0].angle=90
         ENA.value = False
         ENB.value = False
         IN1.value = False
@@ -347,3 +350,6 @@ if __name__ == "__main__":
         GPIO.cleanup()
     else:
         pass
+
+
+    
