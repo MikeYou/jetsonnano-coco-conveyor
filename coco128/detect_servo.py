@@ -46,8 +46,9 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
 from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, time_sync
 
-
-
+"""redlight input """
+D24 = digitalio.DigitalInOut(board.D24)
+D24.direction = digitalio.Direction.INPUT
 
 
 """controlling servo mode PCA9685"""
@@ -236,17 +237,20 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                    
                     """SERVO control"""
                         #good"
-                    if cls == 0:
-                        kit.servo[8].angle=60
-                        kit.servo[0].angle=60
+                    if D24 == False:
+                        if cls == 0:
+                            kit.servo[8].angle=60
+                            kit.servo[0].angle=60
                         #bad"
-                    elif cls == 1:
-                        kit.servo[8].angle=90
-                        kit.servo[0].angle=90
+                        elif cls == 1:
+                            kit.servo[8].angle=90
+                            kit.servo[0].angle=90
                         #agg"
-                    elif cls == 2:
-                        kit.servo[8].angle=120
-                        kit.servo[0].angle=120
+                        elif cls == 2:
+                            kit.servo[8].angle=120
+                            kit.servo[0].angle=120
+                    else:
+                        pass
                         """SERVO"""
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
