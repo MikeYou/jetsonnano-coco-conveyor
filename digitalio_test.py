@@ -54,10 +54,10 @@ IN4.value = False
 
 
 #start conveyor
-ENB.value = True
+ENA.value = True
 
-IN3.value = 1
-IN4.value = 0
+IN1.value = 0
+IN2.value = 1
 #start rotate
 #ENA.value = True
 
@@ -70,8 +70,7 @@ IN4.value = 0
 kit = ServoKit(channels=16)
 """controlling servo mode PCA9685"""
 kit.servo[8].angle=90
-kit.servo[0].angle=80
-
+kit.servo[0].angle=90
 a = input("stop? (y/n)")
 if a == "y":
 # Stop

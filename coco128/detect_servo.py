@@ -46,9 +46,12 @@ from utils.general import (LOGGER, check_file, check_img_size, check_imshow, che
 from utils.plots import Annotator, colors, save_one_box
 from utils.torch_utils import select_device, time_sync
 
-"""redlight input """
-D24 = digitalio.DigitalInOut(board.D24)
-D24.direction = digitalio.Direction.INPUT
+"""controling conveyor and spinning bottle"""
+import board
+import digitalio
+import busio
+import time
+
 
 
 """controlling servo mode PCA9685"""
@@ -56,11 +59,7 @@ from adafruit_servokit import ServoKit
 kit = ServoKit(channels=16)
 
 
-"""controling conveyor and spinning bottle"""
-import board
-import digitalio
-import busio
-import time
+
 """
 #spinning bottle i/o
 
@@ -74,7 +73,9 @@ import time
 #IN4 = D20#38
 #ENB = D12#32
 """
-
+"""redlight input """
+red = digitalio.DigitalInOut(board.D24)
+red.direction = digitalio.Direction.INPUT
 
 ENA = digitalio.DigitalInOut(board.D13)
 IN1 = digitalio.DigitalInOut(board.D19)
@@ -99,10 +100,10 @@ IN3.value = False
 IN4.value = False
 
 #start conveyor
-ENB.value = True
+ENA.value = True
 
-IN3.value = 1
-IN4.value = 0
+IN1.value = 0
+IN2.value = 1
 #start rotate
 #ENA.value = True
 
@@ -112,6 +113,7 @@ IN4.value = 0
 #IN2.value = 0
 
 """controling conveyor and spinning bottle"""
+
 
 
 @torch.no_grad()
@@ -237,7 +239,10 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                    
                     """SERVO control"""
                         #good"
-                    if D24 == False:
+                    
+                    value = red.value
+                    if value == False:
+                                
                         if cls == 0:
                             kit.servo[8].angle=60
                             kit.servo[0].angle=60
@@ -251,6 +256,8 @@ def run(weights=ROOT / 'yolov5s.pt',  # model.pt path(s)
                             kit.servo[0].angle=120
                     else:
                         pass
+                                
+                    
                         """SERVO"""
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
